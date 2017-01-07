@@ -15,9 +15,16 @@ var gitlet = module.exports = {
     }
 
     opts = opts || {};
-
+    /**
+     * This object represents the initial file structure for a .gitlet directory:
+     * │   config
+     * │   HEAD
+     * ├───objects
+     * └───refs
+     *     └───heads
+     */
     var gitletStructure = {
-        HEAD: "ref: refs/heads/master\n",
+        HEAD: "ref: refs/heads/master\n", // creates HEAD file with contents
         config: config.objToStr({core: {"": {bare: opts.bare === true}}}),
         objects: {},
         refs: {
