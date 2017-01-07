@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var fs = require('fs');
 var nodePath = require('path');
+var util = require("./util");
 
 var files = module.exports = {
   /**
@@ -51,5 +52,30 @@ var files = module.exports = {
    */
   inRepo: function() {
     return files.gitletPath() !== undefined;
+  },
+  /**
+   * Takes tree of files as a nested JS obj and writes those files to disk,
+   * taking prefix as the root of the tree.
+   * Tree syntax: { a: { b: { c: "filecontent" }}}
+   *
+   * @param tree
+   * @param prefix
+   */
+  writeFilesFromTree: function(tree, prefix) {
+    Object.keys(tree).forEach(function(name) {
+      var path = nodePath.join(prefix, name);
+      if (util.isString(tree[name])) {
+        // End of the line - write contents
+        fs.writeFileSync(path, tree[name]);
+      }
+      else {
+        // Check that path exists and keep going
+        if (!fs.existsSync(path)) {
+          fs.mkdirSync(path, "777");
+        }
+
+        files.writeFilesFromTree(tree[name], path);
+      }
+    });
   }
 };
