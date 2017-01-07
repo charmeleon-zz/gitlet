@@ -3,11 +3,12 @@
 var util = require("./util");
 var files = require("./files");
 /**
- * Allows the config file at .gitlet/config to be read and written
+ * Allows the .gitlet/config to be read and written
  */
 var config = module.exports = {
   /**
-   * Parse the config string str and returns its contents as a nested JS object
+   * Serialize the config string (contents of .gitlet/config) into a nested JS object, and return the object
+   *
    * @param str
    * @returns string
    */
@@ -20,9 +21,15 @@ var config = module.exports = {
         return "" !== item;
       })
       .reduce(function (c, item) {
+        /**
+         * Example:
+         * [core]
+         * filemode = false
+         * bare = false
+         */
         var lines = item.split("\n");
         var entry = [];
-        // TODO: WAT
+
         entry.push(lines[0].match(/([^ \]]+)( |\])/)[1]);
 
         var subsectionMatch = lines[0].match(/\"(.+)\"/);
@@ -40,8 +47,14 @@ var config = module.exports = {
   read: function () {
     return config.strToObj(files.read(files.gitletPath("config")));
   },
+  /**
+   * Stringifies the config object (serialized contents of .gitlet/config),
+   * and return the string
+   *
+   * @param obj
+   * @returns {string}
+   */
   objToStr: function (obj) {
-    console.log(obj);
     return Object.keys(obj)
       .reduce(function (arr, section) {
         return arr.concat(
