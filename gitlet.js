@@ -24,12 +24,12 @@ var gitlet = module.exports = {
      *     └───heads
      */
     var gitletStructure = {
-        HEAD: "ref: refs/heads/master\n", // creates HEAD file with contents
-        config: config.objToStr({core: {"": {bare: opts.bare === true}}}),
-        objects: {},
-        refs: {
-            heads: {}
-        }
+      config: config.objToStr({core: {"": {bare: opts.bare === true}}}),
+      HEAD: "ref: refs/heads/master\n", // creates HEAD file with contents
+      objects: {},
+      refs: {
+        heads: {}
+      }
     };
 
     files.writeFilesFromTree(opts.bare ? gitletStructure : {".gitlet": gitletStructure},
