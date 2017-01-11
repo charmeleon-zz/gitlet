@@ -67,7 +67,7 @@ var config = module.exports = {
         var settings = obj[entry.section][entry.subsection];
         return "[" + entry.section + subsection + "]\n" +
           Object.keys(settings)
-            .map(function (k) { return " " + k + " = " + settings[k]; })
+            .map(function (k) { return "  " + k + " = " + settings[k]; })
             .join("\n") + "\n";
       })
       .join("");
