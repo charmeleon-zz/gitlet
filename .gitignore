@@ -1,2 +1,4 @@
 /.idea
 /.gitlet
+/node_modules
+/spec/testData

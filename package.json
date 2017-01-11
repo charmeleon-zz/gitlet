@@ -1,0 +1,22 @@
+{
+  "name": "gitlet-js",
+  "version": "0.0.1",
+  "description": "Subset of Git implemented in JavaScript",
+  "main": "gitlet.js",
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charmeleon/gitlet.git"
+  },
+  "author": "Erick Rivas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/charmeleon/gitlet/issues"
+  },
+  "homepage": "https://github.com/charmeleon/gitlet#README.md",
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
